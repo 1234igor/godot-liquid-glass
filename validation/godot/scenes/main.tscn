@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://validation/godot/scripts/main.gd" id="1_main"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/harbour.png" id="2_harbour"]
+[ext_resource type="Shader" path="res://addons/liquid_glass/liquid_glass.gdshader" id="3_glass"]
+[ext_resource type="Shader" path="res://addons/liquid_glass/glass_shadow.gdshader" id="4_shadow"]
+[ext_resource type="Script" path="res://validation/godot/scripts/playback_contents.gd" id="5_contents"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shadow"]
+shader = ExtResource("4_shadow")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glass"]
+shader = ExtResource("3_glass")
+
+[node name="LiquidGlassDemo" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="Backdrop" type="TextureRect" parent="."]
+offset_right = 1200.0
+offset_bottom = 800.0
+mouse_filter = 2
+texture = ExtResource("2_harbour")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="Shadow" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_shadow")
+offset_left = 326.0
+offset_top = 548.0
+offset_right = 874.0
+offset_bottom = 728.0
+mouse_filter = 2
+
+[node name="Glass" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_glass")
+offset_left = 380.0
+offset_top = 602.0
+offset_right = 820.0
+offset_bottom = 698.0
+mouse_default_cursor_shape = 2
+
+[node name="PlaybackContents" type="Control" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 602.0
+offset_right = 820.0
+offset_bottom = 698.0
+mouse_filter = 2
+script = ExtResource("5_contents")

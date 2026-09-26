@@ -1,0 +1,7 @@
+.godot/
+validation/reference-swiftui/.build/
+validation/captures/raw/
+*.log
+.DS_Store
+__pycache__/
+validation/reference-swiftui/**/*.import

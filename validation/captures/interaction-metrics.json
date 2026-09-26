@@ -1,0 +1,15 @@
+{
+  "capture_size_pixels": [
+    2400,
+    1600
+  ],
+  "control_bounds_pixels": [
+    760,
+    1204,
+    1640,
+    1408
+  ],
+  "rest_to_hover_mae_0_255": 3.2023,
+  "hover_to_pressed_mae_0_255": 3.3881,
+  "rest_to_pressed_mae_0_255": 6.5905
+}

@@ -1,0 +1,31 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    # The fast gate is headless: it compiles every script and shader, checks the
+    # backgrounds are byte-identical to the reference copies, and runs the
+    # comparison unit tests. The pixel matrix needs macOS, Xcode and a screen,
+    # so it stays a local command — see validation/README.md.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pillow, for the comparison tests
+        run: python3 -m pip install --break-system-packages pillow
+
+      - uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.1
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import the project
+        run: godot --headless --import
+
+      - name: Fast gate
+        run: validation/tools/check.sh

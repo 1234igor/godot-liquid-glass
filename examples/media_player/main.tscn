@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://examples/media_player/media_player.gd" id="1_app"]
+[ext_resource type="Texture2D" path="res://assets/backgrounds/harbour.png" id="2_backdrop"]
+
+[node name="Horizon" type="Node2D"]
+script = ExtResource("1_app")
+
+[node name="Backdrop" type="TextureRect" parent="."]
+offset_right = 1200.0
+offset_bottom = 800.0
+mouse_filter = 2
+texture = ExtResource("2_backdrop")
+expand_mode = 1
+stretch_mode = 6
