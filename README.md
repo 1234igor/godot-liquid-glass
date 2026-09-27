@@ -8,7 +8,7 @@ An experimental Godot control that refracts and blurs the scene behind it.
 
 The image comes from the reusable addon. Its Clear color response follows GPUI, and refraction and blur scale with the component. See the [direct GPUI comparison](validation/captures/component-comparison.png).
 
-The current 16-case comparison averages 0.922 RGB SSIM against GPUI, ranging from 0.854 to 0.955. Regular on fine facade lines remains the weakest case. This is an approximation, not a pixel-perfect recreation of native Apple glass.
+The current 16-case comparison averages 0.922 RGB SSIM against GPUI, ranging from 0.854 to 0.955. Regular on fine facade lines remains the weakest case. The material remains an approximation, with visible differences from the reference.
 
 ## Run
 
@@ -46,4 +46,4 @@ Panels in the same canvas share a background capture. Keep them together in a st
 
 [Validation](validation/README.md) documents the remaining visual gaps, stored comparisons, and image generation. [Performance](PERFORMANCE.md) covers the dynamic-scene benchmarks.
 
-[MIT license](LICENSE). See [third-party notices](THIRD-PARTY.md). This project is independent of Apple.
+[MIT license](LICENSE). See [third-party notices](THIRD-PARTY.md).
