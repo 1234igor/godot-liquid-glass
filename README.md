@@ -1,14 +1,10 @@
 # Liquid Glass for Godot
 
-An experimental Godot control that refracts and blurs the scene behind it.
+Glass panels for Godot with refraction, blur, rounded corners, and hover and press effects. Choose Clear or Regular glass, with optional tinting.
 
 ![Four Godot glass materials over a harbour photo and a building facade](examples/media_player/app.png)
 
 [Image credits and licenses](IMAGE-LICENSES.md): Bernard Spragg (CC0) and project-generated backgrounds (MIT).
-
-The image comes from the reusable addon. Its Clear color response follows GPUI, and refraction and blur scale with the component. See the [direct GPUI comparison](validation/captures/component-comparison.png).
-
-The current 16-case comparison averages 0.922 RGB SSIM against GPUI, ranging from 0.854 to 0.955. Regular on fine facade lines remains the weakest case. The material remains an approximation, with visible differences from the reference.
 
 ## Run
 
@@ -44,6 +40,6 @@ Panels in the same canvas share a background capture. Keep them together in a st
 
 ## Development
 
-[Validation](validation/README.md) documents the remaining visual gaps, stored comparisons, and image generation. [Performance](PERFORMANCE.md) covers the dynamic-scene benchmarks.
+[Rendering checks and screenshot scripts](validation/README.md) · [Benchmarks](PERFORMANCE.md).
 
 [MIT license](LICENSE). See [third-party notices](THIRD-PARTY.md).
