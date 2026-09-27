@@ -17,8 +17,8 @@ Run every material:
 validation/performance/run-matrix.sh /tmp/godot-liquid-glass-performance
 ```
 
-Both runners use the exact `/Applications/Godot.app` bundle, launch it behind
-the active app with `open -g`, serialize launches, and terminate only the child
-they create.
+The runners use `/Applications/Godot.app` by default, launch it behind the
+active app with `open -g`, and terminate the child they create. The matrix runs
+configurations one at a time; separate invocations are not locked against each other.
 Environment variables `PERF_WARMUP`, `PERF_FRAMES`, and `GODOT_APP` can override
 the defaults. `PERF_TIMEOUT` controls the per-run 90-second timeout.

@@ -46,11 +46,9 @@ validation/performance/run-matrix.sh /tmp/godot-liquid-glass-performance
 | 24 Identity surfaces | median draw calls | 25 | 1 | 96.0% fewer |
 | 24 Identity surfaces | p95 | 15.572 ms | 8.421 ms | 45.9% lower |
 
-The one-surface result is within the no-glass run's callback-resolution noise;
-it should be read as no measurable 120 Hz cadence penalty, not as glass making
-the scene faster.
+The one-surface and no-glass runs both have a median interval of about 8.33 ms.
 
-## Final material matrix
+## Earlier material matrix
 
 | Material | Surfaces | Median | p95 | Frames over 12.5 ms |
 |---|---:|---:|---:|---:|
@@ -62,18 +60,13 @@ the scene faster.
 | Clear Tinted | 24 | 8.333 ms | 8.444 ms | 0 / 480 |
 | Identity | 24 | 8.334 ms | 8.421 ms | 0 / 480 |
 
-A subsequent exact-code 24-Regular smoke under concurrent host load measured
-8.337 ms median, 9.246 ms p95, and one frame over 16.67 ms. The range above
-includes that run instead of reporting only the best matrix sample.
+A later 24-panel Regular run, while other processes were active, measured
+8.337 ms median, 9.246 ms p95, and one frame over 16.67 ms. Both runs are
+included in the ranges above.
 
-## Fidelity guardrails
+## Visual comparisons
 
-Speed is only worth having if the output still matches. The optimized
-single-sample Regular path was checked against the nine-sample glass crop it
-replaced and is 99.8594% similar to it, so the cheaper sampling is not what
-moves the needle against SwiftUI.
-
-The native comparison is re-run after any change here. Current numbers, the
-acceptance gates, and the one material that no longer clears its gate on
-macOS 27 are all in [`validation/README.md`](validation/README.md) rather than
-duplicated in this file, so they cannot drift apart.
+[Validation](validation/README.md) contains the current component captures,
+reference comparisons, and measurements. The tables above describe the earlier
+single-mip shader; the 2026-09-27 run at the top of this page uses the updated
+49-tap kernel.
