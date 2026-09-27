@@ -1,9 +1,20 @@
 # Godot Liquid Glass performance
 
 The addon keeps one live framebuffer snapshot per 2D canvas and shares it across
-all active `LiquidGlassPanel` instances. Regular diffusion uses one trilinear
-mip sample instead of nine explicit screen reads, while Identity disables its
+all active `LiquidGlassPanel` instances. Regular now uses a 49-tap mip-filtered
+Gaussian kernel whose radius follows component scale. Identity disables its
 glass draw, shadow, and capture participation.
+
+## Shader update, 2026-09-27
+
+One background run of the existing 24-panel Regular benchmark, after the visual
+fixes, measured **8.314 ms median / 8.782 ms p95**, with no frames over 12.5 ms
+in 480 samples after 120 warmup frames. This used Godot 4.7.1, Apple M4 Pro,
+1200 × 800, and a 120 Hz cap. It checks cadence on this machine; it is not an
+uncapped GPU cost measurement.
+
+The tables below are historical results from the earlier single-mip shader.
+They have not been re-measured as a full matrix after this update.
 
 ## Test setup
 

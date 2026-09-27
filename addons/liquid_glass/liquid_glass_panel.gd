@@ -17,7 +17,7 @@ enum MaterialStyle {
 		_apply_material()
 		if is_inside_tree():
 			_refresh_capture_strategy()
-@export_range(0.0, 1.0, 0.01) var warmth := 0.75:
+@export_range(0.0, 1.0, 0.01) var warmth := 0.90:
 	set(value):
 		warmth = value
 		_apply_material()
@@ -39,6 +39,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	set_notify_transform(true)
 	clip_contents = false
 	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	add_to_group(CAPTURE_GROUP)
@@ -51,6 +52,11 @@ func _ready() -> void:
 	_apply_geometry()
 	_apply_material()
 	_refresh_capture_strategy()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSFORM_CHANGED and is_inside_tree():
+		_apply_geometry()
 
 
 func _exit_tree() -> void:
@@ -116,7 +122,9 @@ func _apply_geometry() -> void:
 	material.set_shader_parameter("corner_radius", effective_radius)
 	if is_inside_tree():
 		material.set_shader_parameter("screen_pixel_size", Vector2.ONE / get_viewport_rect().size)
-		material.set_shader_parameter("render_scale", get_window().content_scale_factor)
+		# Include parent/canvas scaling, including the 2x reference capture.
+		var transform := get_global_transform_with_canvas()
+		material.set_shader_parameter("render_scale", transform.x.length() * get_window().content_scale_factor)
 
 
 func _apply_material() -> void:

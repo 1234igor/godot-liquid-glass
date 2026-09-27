@@ -1,86 +1,46 @@
 # Validation
 
-This directory holds the pixel reference for the addon: a small SwiftUI
-application that calls Apple's public `.glassEffect`, a Godot scene that draws
-the same composition through `addons/liquid_glass/`, and the tooling that
-captures both and compares them.
+The current comparison captures `LiquidGlassPanel` itself, at the same size and position as GPUI. The README image uses this path too.
 
-The point is that the similarity claims in the README are measurements anyone
-can repeat, not assertions.
+## Current component results
 
-## What is measured
+Captured on 2026-09-27 with Godot 4.7.1 on an Apple M4 Pro. Sixteen cases cover four materials and four backgrounds at 2400 × 1600.
 
-Five materials × four backgrounds = 20 pairs, captured at 2400 × 1600 and
-compared in sRGB. Each pair is scored three ways:
+The comparison converts tagged images to sRGB before measuring the **880 × 192 control bounds**, excluding the surrounding photograph. It reports RGB SSIM, mean absolute channel error, and pixels with severe channel error.
 
-| Region | What it covers |
-|--------|----------------|
-| Whole window | The full 2400 × 1600 frame |
-| Glass crop | The expanded glass surface and the pixels immediately around it |
-| Control bounds | Just the control, where the optics are strongest |
+| Comparison against stored GPUI renders | RGB SSIM |
+| --- | ---: |
+| Mean across 16 cases | 0.922 |
+| Lowest: Regular on facade | 0.854 |
+| Highest: Clear on facade | 0.955 |
 
-Each score is a **gate**, not a report. The thresholds are in
-`tools/compose-evidence.py`, which is what raises the failure at the end of a
-full run.
+SSIM measures image structure on a scale whose maximum is 1. It is not a percentage of identical pixels. Fifteen cases exceed 0.90; Regular on dense facade lines remains below that level. This does not establish pixel-perfect native Apple fidelity.
 
-## Current results
+See the [GPUI/Godot close-ups](captures/component-comparison.png) and [all measurements](captures/component-metrics.json). The report also includes comparisons with the stored native SwiftUI captures and SHA-256 hashes of every source image. GPUI and SwiftUI were not recaptured for this run.
 
-Measured on macOS 27 with Godot 4.7.1:
+The fixes align Clear's color transform with GPUI, include parent scaling in refraction, and use a blur kernel whose size follows the component scale. The old single mip sample changed apparent blur between 1x and 2x.
 
-| Metric | Range |
-|--------|-------|
-| Glass crop — Regular, Clear, both tinted | 93.78 – 97.73 % |
-| Glass crop — Identity | 98.81 – 99.52 % |
-| Whole window | 99.42 – 99.94 % |
+## Capture and compare
 
-Checked in as [`captures/background-matrix.png`](captures/background-matrix.png)
-and `captures/background-metrics.json`.
+From the repository root, with Pillow 10.1+ and NumPy installed:
 
-### Known failure
-
-`tools/full-visual.sh` **reports a failure on Regular out of the box**:
-
-```
-harbour/regular     glass 94.91% < 95.00%
-city-night/regular  glass 93.78% < 95.00%
-prism/regular       glass 94.78% < 95.00%
+```sh
+python3 validation/tools/capture-components.py
+python3 validation/tools/compose-showcase.py
+python3 validation/tools/compare-components.py ../gpui-liquid-glass/validation/captures/raw/backgrounds
 ```
 
-The optics were calibrated against macOS 26. macOS 27 moved the Regular
-material slightly; the other four are unaffected and still clear the gate. The
-gate has deliberately **not** been lowered to make the run green — a gate that
-moves whenever it fails measures nothing. Re-tuning Regular against the current
-system is the open work.
+Set `GODOT` to a background-safe launcher when running without user interaction. The GPUI argument must contain its generated raw matrix. The comparator also needs the native captures under this repo's `validation/captures/raw/backgrounds/`.
 
-## Running it
+The image composer checks dimensions, crops, resizes, and adds labels. It does not add glass effects. Raw captures are generated files and are not checked in. [Image credits](../IMAGE-LICENSES.md) cover the backgrounds and screenshots.
 
-Fast — scripts, shaders, asset parity and the comparison unit tests, no GUI:
+## Other checks
 
 ```sh
 validation/tools/check.sh
-```
-
-Full — builds the SwiftUI reference, then captures and compares all 20 pairs:
-
-```sh
 validation/tools/full-visual.sh
 ```
 
-That needs macOS 26 or newer and a matching Xcode, plus permission for
-`screencapture` to record the screen. `tools/gd.sh` launches the dedicated
-reference scene explicitly, so the root project keeps opening the media-player
-example. GUI launches are serialized, framebuffer captures quit themselves, and
-cleanup targets only the exact process the current run created.
+The first checks scripts, shaders, assets, and capture sharing without a window. The second captures the older standalone shader scene against SwiftUI. Native captures require macOS 26 or later, matching Xcode, and Screen Recording permission; set `DEVELOPER_DIR` to choose Xcode.
 
-The reference build uses whatever `xcode-select -p` points at; override it with
-`DEVELOPER_DIR=...` if you keep several Xcodes.
-
-## Layout
-
-| Path | What it is |
-|------|-----------|
-| `reference-swiftui/` | The SwiftUI application the Godot output is compared against |
-| `godot/` | The Godot scene that draws the matching composition |
-| `tools/` | Capture, comparison and evidence-composition scripts |
-| `performance/` | The offscreen benchmark and capture-strategy test |
-| `captures/` | Checked-in evidence; `captures/raw/` is generated and ignored |
+`background-matrix.png` and `background-metrics.json` retain the earlier native comparison, before the current shader changes. That run failed three Regular cases. Its `similarity_percent` field is `100 × (1 − mean absolute RGB error / 255)`, not the percentage of matching pixels. Neither that score nor a README cover alone establishes visual fidelity.

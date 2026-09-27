@@ -1,0 +1,290 @@
+{
+  "color_space": "sRGB",
+  "control_bounds": [
+    760,
+    1204,
+    1640,
+    1396
+  ],
+  "method": "11x11 Gaussian RGB SSIM, sigma 1.5, population covariance; not percent matching pixels",
+  "reference": "Stored GPUI and native SwiftUI captures; current Godot production addon",
+  "cases": {
+    "harbour/regular": {
+      "vs_gpui": {
+        "rgb_ssim": 0.907415,
+        "mae_0_255": 4.0239,
+        "pixels_over_64_percent": 0.6339
+      },
+      "vs_native": {
+        "rgb_ssim": 0.845987,
+        "mae_0_255": 21.6348,
+        "pixels_over_64_percent": 1.7898
+      },
+      "sha256": {
+        "godot": "02afb8f55b087dd0b7f685b98bc773f1f41b8989402d4a3ff1b8a26e9f02dbbe",
+        "gpui": "f14a67be9f51e1ccd26ebcab4e1c64122ddb18be5add20f40db7fba24ef55b1e",
+        "native": "61b5af51d970b1fa921ee8043f722d1e98fd7a355c87a870566c4804a81126cb"
+      }
+    },
+    "harbour/clear": {
+      "vs_gpui": {
+        "rgb_ssim": 0.940668,
+        "mae_0_255": 3.4673,
+        "pixels_over_64_percent": 1.7051
+      },
+      "vs_native": {
+        "rgb_ssim": 0.653886,
+        "mae_0_255": 27.2368,
+        "pixels_over_64_percent": 10.9914
+      },
+      "sha256": {
+        "godot": "9671c33a35ed6a41d5a32b654f89b3926d84f0988ca5b9fe04863fda48f43598",
+        "gpui": "1a60df54494b6f744531ce36fd91d5c23b7bf004e4f0db6ef5580d15a8874c21",
+        "native": "85faeafc70317c9482d0e35b7ca536a75a5f0053ff99c5adbb1be54ab2cd281f"
+      }
+    },
+    "harbour/regular-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.924633,
+        "mae_0_255": 4.2193,
+        "pixels_over_64_percent": 3.0611
+      },
+      "vs_native": {
+        "rgb_ssim": 0.750635,
+        "mae_0_255": 11.0456,
+        "pixels_over_64_percent": 4.5159
+      },
+      "sha256": {
+        "godot": "56272aac24ce617bd62a745df85ac8183260adf51513aa1936451a7860d8f3a8",
+        "gpui": "1558573c79af7fbe8f816707f5cd03f52bef106f411e0204a4ca0062e938389b",
+        "native": "28c701b6c330c9a63ccda26cabdd58318fede64ec9481852afc9e05e8de01383"
+      }
+    },
+    "harbour/clear-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.918155,
+        "mae_0_255": 4.3658,
+        "pixels_over_64_percent": 3.0788
+      },
+      "vs_native": {
+        "rgb_ssim": 0.755578,
+        "mae_0_255": 19.6316,
+        "pixels_over_64_percent": 5.0118
+      },
+      "sha256": {
+        "godot": "9362222ca3219c7e647644f15710137da119c282c6a54763e3a9f44e11eed207",
+        "gpui": "8d48541f86d81fc928f747963a75e02457845e2356892bb13c8f7fae4fa3ef5b",
+        "native": "8f18494f421868bafe610b0fdfb06cd9b2e10e2bf3d2753e657c62ba8301d0f5"
+      }
+    },
+    "city-night/regular": {
+      "vs_gpui": {
+        "rgb_ssim": 0.925921,
+        "mae_0_255": 3.6942,
+        "pixels_over_64_percent": 1.3542
+      },
+      "vs_native": {
+        "rgb_ssim": 0.832755,
+        "mae_0_255": 28.2445,
+        "pixels_over_64_percent": 3.1747
+      },
+      "sha256": {
+        "godot": "94f3b36b5e388c9f299ae43e3a8edc101df61a5177d730de8e4fadc8c34511fe",
+        "gpui": "9b7e3a0f35a79a85f9ca599aac2dc1f687c551b5517b8fe2b0d6ed46e83b0c7a",
+        "native": "5ae24d3334ad31341021826897f9c6d12ed7606cc80b395b734d1395aef8076a"
+      }
+    },
+    "city-night/clear": {
+      "vs_gpui": {
+        "rgb_ssim": 0.927189,
+        "mae_0_255": 4.7579,
+        "pixels_over_64_percent": 2.5994
+      },
+      "vs_native": {
+        "rgb_ssim": 0.760095,
+        "mae_0_255": 24.3386,
+        "pixels_over_64_percent": 8.0001
+      },
+      "sha256": {
+        "godot": "1ab8eff86370fb7161c152e83c1679280909a377004ef99a6dbbc5434a31771c",
+        "gpui": "0c112fd4f096e7936437446090b4db9a0ef5f0e8bda49281449000355b442b29",
+        "native": "a0a9a357d70b36fddd23b4ddda22fcc67a83bbd439048e7f95b3310d08388084"
+      }
+    },
+    "city-night/regular-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.926936,
+        "mae_0_255": 4.1738,
+        "pixels_over_64_percent": 3.0741
+      },
+      "vs_native": {
+        "rgb_ssim": 0.686762,
+        "mae_0_255": 12.3758,
+        "pixels_over_64_percent": 5.0391
+      },
+      "sha256": {
+        "godot": "7983d65fd6bbb5d27512e0252ab9a2c83a4b5752cc6ec414eaaad723642b1a1c",
+        "gpui": "36ef3ca852b1dc1a67e4264545e96bd01c6de5f0eb81c76b0959e1d81d89a91d",
+        "native": "d24936558161f0de38a0086fc4a11c6ae97d7e06fd8478ba073c74736c81466d"
+      }
+    },
+    "city-night/clear-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.909871,
+        "mae_0_255": 4.3263,
+        "pixels_over_64_percent": 3.0836
+      },
+      "vs_native": {
+        "rgb_ssim": 0.838245,
+        "mae_0_255": 19.1942,
+        "pixels_over_64_percent": 4.9201
+      },
+      "sha256": {
+        "godot": "ed1156a8888e0db0433ea3589d6fcbc0e65fa40ec61cdd7d75de48c122a621ec",
+        "gpui": "471255d971fe9017c4c24b09f29bc8d1a3efa99315f88cd5b211d7219897e8b2",
+        "native": "85b89f31e621f6c4aa15816651598f413e1b56c13f32482602cff62b4bf22e49"
+      }
+    },
+    "prism/regular": {
+      "vs_gpui": {
+        "rgb_ssim": 0.935166,
+        "mae_0_255": 4.1061,
+        "pixels_over_64_percent": 1.3761
+      },
+      "vs_native": {
+        "rgb_ssim": 0.837581,
+        "mae_0_255": 24.0341,
+        "pixels_over_64_percent": 6.2713
+      },
+      "sha256": {
+        "godot": "5b01e4428755c52ed86d224ec684acd452f7caf154e6f7b6ea29526c00edef3b",
+        "gpui": "e6cd15b1fd358a79da9f286baeb22b7f7bf4d5bf7a34733f7a1d00250191aa9f",
+        "native": "5f43f2a82df4f549d0174c2618719c9ec50d0511b4bbb403781d7d1815d48ebb"
+      }
+    },
+    "prism/clear": {
+      "vs_gpui": {
+        "rgb_ssim": 0.93223,
+        "mae_0_255": 4.2953,
+        "pixels_over_64_percent": 2.6864
+      },
+      "vs_native": {
+        "rgb_ssim": 0.808562,
+        "mae_0_255": 24.5553,
+        "pixels_over_64_percent": 8.853
+      },
+      "sha256": {
+        "godot": "8beadc6d8c22a6f78f92d8a04d5c5b4a3cca6278293bf95113c0697fd343fc0c",
+        "gpui": "786f51bf09ddb246193cb2e4b6de9fe5de07654c22fa03801e888b6c1700fa6b",
+        "native": "f1e94723805b8673230dd3d1c21a9decf79bfd127d25732394e9c6029600d374"
+      }
+    },
+    "prism/regular-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.920689,
+        "mae_0_255": 4.3119,
+        "pixels_over_64_percent": 3.0475
+      },
+      "vs_native": {
+        "rgb_ssim": 0.738825,
+        "mae_0_255": 11.5832,
+        "pixels_over_64_percent": 4.8704
+      },
+      "sha256": {
+        "godot": "837857c1344e1b5d127d861eeade9d326574e5c5762fc5c1609725ab708de34e",
+        "gpui": "8d9604d5da24291a0f718fa0196d19b5385ebb81e8de45bbad8bd3b4f95e0a29",
+        "native": "eab019ce2f75c4ae3fc1e89f1b6e7d283ec1a635adc465d83e360500a0dbc1e1"
+      }
+    },
+    "prism/clear-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.910933,
+        "mae_0_255": 4.3503,
+        "pixels_over_64_percent": 3.07
+      },
+      "vs_native": {
+        "rgb_ssim": 0.831541,
+        "mae_0_255": 19.0673,
+        "pixels_over_64_percent": 5.0681
+      },
+      "sha256": {
+        "godot": "916993c9144299ec2f110bdb4eb6e04c325237573dbc614dfd86c06681f3936d",
+        "gpui": "7a578afcdb7629f8bfa6eefd711f002d0d4e2ad51c966883a3e3624a163e5df4",
+        "native": "7afca657397a50d899768a64c9f67a8c0855c7aab30181393f0bbbb262aebb66"
+      }
+    },
+    "facade/regular": {
+      "vs_gpui": {
+        "rgb_ssim": 0.854482,
+        "mae_0_255": 4.2657,
+        "pixels_over_64_percent": 0.1823
+      },
+      "vs_native": {
+        "rgb_ssim": 0.790562,
+        "mae_0_255": 16.6914,
+        "pixels_over_64_percent": 1.2399
+      },
+      "sha256": {
+        "godot": "fc35a3654aa69e036cfe44716beda8a2b5af69127cdd68014c37c7ed381cf407",
+        "gpui": "2036e7c176fc834e2a8e3b54bcdf90b901f8033c4be6709949a428ce57cb7605",
+        "native": "b9637b0d419da3609ca5ed9c64151eb3982b33c8992aba7216957db05f6e513a"
+      }
+    },
+    "facade/clear": {
+      "vs_gpui": {
+        "rgb_ssim": 0.955206,
+        "mae_0_255": 2.3937,
+        "pixels_over_64_percent": 0.4563
+      },
+      "vs_native": {
+        "rgb_ssim": 0.713869,
+        "mae_0_255": 29.8778,
+        "pixels_over_64_percent": 8.6429
+      },
+      "sha256": {
+        "godot": "7bbb83ff06ac81d714dfc2e0feb391cfcbd7aa5fcbba9ac581c4bf408edaf045",
+        "gpui": "44bc66bab18d956e5abac9927d490dd3373ca9e0a0b6eaed208831037180407c",
+        "native": "c51e4fe8cbfe64289a70b5d6c5ede0a15ceab535d10831d7f5b1ef90ce86052e"
+      }
+    },
+    "facade/regular-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.930931,
+        "mae_0_255": 4.1895,
+        "pixels_over_64_percent": 3.0492
+      },
+      "vs_native": {
+        "rgb_ssim": 0.822895,
+        "mae_0_255": 8.9308,
+        "pixels_over_64_percent": 4.7372
+      },
+      "sha256": {
+        "godot": "df1eb4a6d6d7d0d9840ed572617cbecfc94c09ebea40ba4b58364d385786fda8",
+        "gpui": "600599e525f68730d4ecf74d73077a9d8c02428ab2f0cc4914bf82363361ddb3",
+        "native": "669f91e128afb7e7f75610fcf6c48b7adf952886204bc54c516aada4878f1790"
+      }
+    },
+    "facade/clear-tinted": {
+      "vs_gpui": {
+        "rgb_ssim": 0.936298,
+        "mae_0_255": 4.1482,
+        "pixels_over_64_percent": 3.0131
+      },
+      "vs_native": {
+        "rgb_ssim": 0.662127,
+        "mae_0_255": 19.7705,
+        "pixels_over_64_percent": 4.9373
+      },
+      "sha256": {
+        "godot": "687e5a605b5700af5030f02890ed59fdc8481cdb5ad55cfb6bc4f5c482841144",
+        "gpui": "0bac5ab4ac55b223d50caa2ca0e4e2ed787dfcd211153831d267833c2d40a1b0",
+        "native": "88baff50ccc57a7cc6194619734b029a57bc1414732027945890e42303c34498"
+      }
+    }
+  },
+  "gpui_ssim_summary": {
+    "mean": 0.922295,
+    "min": 0.854482,
+    "max": 0.955206
+  }
+}

@@ -21,6 +21,19 @@ func _run() -> void:
 
 	if not _expect_modes([0, 2, 0], "Z-ordered provider"):
 		return
+	host.scale = Vector2(2.0, 2.0)
+	await process_frame
+	var material := _surfaces[0]._glass.material as ShaderMaterial
+	if not is_equal_approx(material.get_shader_parameter("render_scale"), 2.0):
+		printerr("CAPTURE STRATEGY FAIL - parent scale did not reach the shader")
+		quit(1)
+		return
+	host.scale = Vector2.ONE
+	await process_frame
+	if not is_equal_approx(material.get_shader_parameter("render_scale"), 1.0):
+		printerr("CAPTURE STRATEGY FAIL - shader scale did not reset")
+		quit(1)
+		return
 	_surfaces[1].warmth = 0.2
 	if not _expect_modes([0, 2, 0], "warmth preserves provider"):
 		return

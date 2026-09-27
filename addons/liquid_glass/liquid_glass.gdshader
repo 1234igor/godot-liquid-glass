@@ -1,8 +1,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-// The live framebuffer behind this CanvasItem. A trilinear mip sample supplies
-// the broad diffusion lobe without repeated screen reads.
+// The live framebuffer behind this CanvasItem.
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear_mipmap;
 uniform vec2 size_points = vec2(440.0, 96.0);
 uniform vec2 screen_pixel_size = vec2(0.0004166667, 0.000625);
@@ -30,9 +29,21 @@ vec3 refracted_sample(vec2 uv, vec2 normal, float lens) {
 		return textureLod(screen_texture, sample_uv, 0.0).rgb;
 	}
 
-	// The mip lobe is deliberately narrower than a generic frosted-glass blur;
-	// native Regular Glass preserves broad shapes and high-contrast edges.
-	return textureLod(screen_texture, sample_uv, 3.25).rgb;
+	// Approximate GPUI's 8-point Gaussian with a mip-filtered kernel.
+	// Express both the kernel and mip level in points so 1x and 2x agree.
+	vec3 softened = vec3(0.0);
+	float total = 0.0;
+	float lod = max(0.0, log2(8.0 * render_scale));
+	for (int y = -3; y <= 3; y++) {
+		for (int x = -3; x <= 3; x++) {
+			vec2 offset = vec2(float(x), float(y)) * 8.0;
+			float weight = exp(-0.5 * dot(offset, offset) / (7.5 * 7.5));
+			softened += textureLod(screen_texture,
+				sample_uv + offset * render_scale * screen_pixel_size, lod).rgb * weight;
+			total += weight;
+		}
+	}
+	return softened / total;
 }
 
 void fragment() {
@@ -97,6 +108,30 @@ void fragment() {
 				0.054469 * color.r + 0.190262 * color.g + 0.026954 * color.b + 211.7142 / 255.0,
 				0.178054 * color.r + 0.507345 * color.g - 0.211269 * color.b - 95.3155 / 255.0,
 				0.155782 * color.r + 0.465979 * color.g - 0.131520 * color.b - 55.3333 / 255.0
+			);
+		}
+	}
+
+	// Keep Clear's color response aligned with the current GPUI material.
+	if (is_clear > 0.5) {
+		color = clamp(color, vec3(0.0), vec3(1.0));
+		if (is_tinted < 0.5) {
+			color = vec3(
+				1.334711 * color.r + 0.214589 * color.g - 0.281378 * color.b - 0.049184,
+				-0.147284 * color.r + 1.629309 * color.g - 0.224290 * color.b - 0.039991,
+				-0.196570 * color.r + 0.115755 * color.g + 1.324347 * color.b - 0.012006
+			);
+		} else {
+			color = vec3(
+				1.472903 * color.r - 0.258041 * color.g - 0.097548 * color.b - 0.138594,
+				1.510637 * color.r + 0.643022 * color.g - 0.306962 * color.b - 1.070967,
+				1.930113 * color.r + 0.456934 * color.g - 0.273570 * color.b - 1.329566
+			);
+			color = clamp(color, vec3(0.0), vec3(1.0));
+			color = vec3(
+				0.884876 * color.r - 0.007972 * color.g + 0.132201 * color.b + 0.042586,
+				-0.222265 * color.r + 1.163902 * color.g + 0.052029 * color.b + 0.011485,
+				-0.182171 * color.r + 0.156777 * color.g + 1.006060 * color.b + 0.013433
 			);
 		}
 	}

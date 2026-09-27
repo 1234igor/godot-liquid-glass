@@ -8,7 +8,7 @@ const MATERIALS := [
 	LiquidGlassPanel.MaterialStyle.IDENTITY,
 ]
 
-var _material_index := 0
+var _material_index := 1
 var _surfaces: Array[LiquidGlassPanel] = []
 var _shot_path := ""
 
@@ -46,8 +46,8 @@ func _make_navigation() -> void:
 
 func _make_player() -> void:
 	var glass := _surface(Vector2(310.0, 638.0), Vector2(580.0, 110.0), 38.0)
-	# The row is inset so the leading and trailing labels clear the glass edge,
-	# where the lens distortion is strongest and text stops being readable.
+	glass.material_style = LiquidGlassPanel.MaterialStyle.CLEAR
+	# Keep the player contents inside the rounded edge.
 	var inset := MarginContainer.new()
 	inset.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for side in ["margin_left", "margin_right"]:
@@ -56,12 +56,13 @@ func _make_player() -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 18)
 	row.alignment = BoxContainer.ALIGNMENT_CENTER
-	var play := _label("PLAY", 13, Color.WHITE)
+	var play := _label("▶", 24, Color.WHITE)
 	play.custom_minimum_size = Vector2(58.0, 0.0)
 	row.add_child(play)
 	var copy := VBoxContainer.new()
 	copy.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	copy.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	copy.alignment = BoxContainer.ALIGNMENT_CENTER
 	copy.add_theme_constant_override("separation", 4)
 	copy.add_child(_label("Glass Horizon", 20, Color.WHITE))
 	copy.add_child(_label("Harbour Sessions", 14, Color(1.0, 1.0, 1.0, 0.70)))
